@@ -1,0 +1,9 @@
+
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: flux-tester
+  namespace: flux-tester
+spec:
+  interval: 5m
+  url: https://charts.bitnami.com/bitnami
