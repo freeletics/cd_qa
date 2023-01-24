@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../apps/tester
+patchesStrategicMerge:
+  - tester.yaml
+
+# This to change in case of API change
+patchesJson6902:
+  - target:
+      group: helm.toolkit.fluxcd.io
+      version: v2beta1
+      kind: 'HelmRelease'
+      name: '.*'
+    patch: |-
+      - op: replace
+        path: "/apiVersion"
+        value: helm.toolkit.fluxcd.io/v2beta1
+
+# patches:
+# - target:
+#     kind: 'HelmRelease|GitRepository|ImagePolicy|ImageRepository|Kustomization'
+#   patch: |-
+#     - op: add
+#       path: /metadata/name
+#       value: correct_name

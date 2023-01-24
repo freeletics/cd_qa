@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: flux-tester
+  namespace: flux-tester
+spec:
+  releaseName: flux-tester
+  interval: 60m
+  install:
+    remediation:
+      retries: 3
+  values:
+    diagnosticMode:
+      enabled: true
